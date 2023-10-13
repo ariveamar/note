@@ -1,38 +1,47 @@
-nohup --pool volumes export 	volume-7806f1fc-ae8b-464f-977e-ca43adbc0b3a	extend-volume-worker12-u05	>> /backup/log/part1-extend-volume-worker12-u05	hci-backup10
-nohup --pool volumes export 	volume-20d59877-a466-438e-8a36-2997d3c565d3	extend-volume-worker12-u04	>> /backup/log/part1-extend-volume-worker12-u04	hci-backup10
-nohup --pool volumes export 	volume-d1c22125-64b4-406f-bcd5-0ae8d6fa92d0	extend-volume-worker12-u03	>> /backup/log/part2-extend-volume-worker12-u03	hci-backup10
-nohup --pool volumes export 	volume-a0407cf4-e4d3-4b1b-aca2-0b0f4436018a	extend-volume-worker12-u02	>> /backup/log/part2-extend-volume-worker12-u02	hci-backup10
-nohup --pool volumes export 	volume-d21b3475-3d46-4864-bd1c-b38ff2acc293	extend-volume-worker12-u01	>> /backup/log/part2-extend-volume-worker12-u01	hci-backup13
 nohup --pool volumes export 	volume-33531a80-c259-413f-8491-e4ab699aa970	vol-additional5-worker12	>> /backup/log/part1-vol-additional5-worker12	hci-backup10
 nohup --pool volumes export 	volume-611db6bf-d490-403b-aa16-a78ee8366301	vol-additional4-worker12	>> /backup/log/part1-vol-additional4-worker12	hci-backup10
-nohup --pool volumes export 	volume-ad8abf76-7052-4e41-993f-f2356b70bcff	vol-additional3-worker12	>> /backup/log/part1-vol-additional3-worker12	hci-backup10
-nohup --pool volumes export 	volume-2f652b81-b118-4901-bd03-ab0060c82be1	vol-additional2-worker12	>> /backup/log/part2-vol-additional2-worker12	hci-backup11
-nohup --pool volumes export 	volume-4c3bfb18-90b6-4c45-b6fe-4628d742eea0	vol-additional1-worker12	>> /backup/log/part2-vol-additional1-worker12	hci-backup11
-nohup --pool volumes export 	volume-b22ef70d-c5ff-4361-9b40-d7f42289060e	vol-os-worker12-dummy	>> /backup/log/part2-vol-os-worker12-dummy	hci-backup13
-				
-				
-nohup --pool volumes export 	volume-92475148-0084-4311-8986-9ec03b619feb	extend-volume-worker13-u05	>> /backup/log/part1-extend-volume-worker13-u05	hci-backup11
-nohup --pool volumes export 	volume-b447d513-4610-4b1a-8069-84df462d775f	extend-volume-worker13-u04	>> /backup/log/part1-extend-volume-worker13-u04	hci-backup11
+
+nohup --pool volumes export 	volume-ad8abf76-7052-4e41-993f-f2356b70bcff	vol-additional3-worker12	>> /backup/log/part2-vol-additional3-worker12	hci-backup10
+nohup --pool volumes export 	volume-d1c22125-64b4-406f-bcd5-0ae8d6fa92d0	extend-volume-worker12-u03	>> /backup/log/part2-extend-volume-worker12-u03	hci-backup10
+nohup --pool volumes export 	volume-a0407cf4-e4d3-4b1b-aca2-0b0f4436018a	extend-volume-worker12-u02	>> /backup/log/part2-extend-volume-worker12-u02	hci-backup10
+nohup --pool volumes export 	volume-7806f1fc-ae8b-464f-977e-ca43adbc0b3a	extend-volume-worker12-u05	>> /backup/log/part2-extend-volume-worker12-u05	hci-backup10
+
+
+nohup --pool volumes export 	volume-16b06eaa-688c-43c3-8d88-9ca438eddf2d	vol-additional5-worker13	>> /backup/log/part1-vol-additional5-worker13	hci-backup11
+nohup --pool volumes export 	volume-2f652b81-b118-4901-bd03-ab0060c82be1	vol-additional2-worker12	>> /backup/log/part1-vol-additional2-worker12	hci-backup11
+
 nohup --pool volumes export 	volume-aa9fa754-141c-448f-9e85-0e293f03b8be	extend-volume-worker13-u03	>> /backup/log/part2-extend-volume-worker13-u03	hci-backup11
 nohup --pool volumes export 	volume-a6b63d9d-ae95-4c07-a69b-ee74806eb24b	extend-volume-worker13-u02	>> /backup/log/part2-extend-volume-worker13-u02	hci-backup11
-nohup --pool volumes export 	volume-12f167e2-df04-4507-9056-b53ab2fdfd5a	extend-volume-worker13-u01	>> /backup/log/part2-extend-volume-worker13-u01	hci-backup13
-nohup --pool volumes export 	volume-16b06eaa-688c-43c3-8d88-9ca438eddf2d	vol-additional5-worker13	>> /backup/log/part1-vol-additional5-worker13	hci-backup11
+nohup --pool volumes export 	volume-4c3bfb18-90b6-4c45-b6fe-4628d742eea0	vol-additional1-worker12	>> /backup/log/part2-vol-additional1-worker12	hci-backup11
+nohup --pool volumes export 	volume-92475148-0084-4311-8986-9ec03b619feb	extend-volume-worker13-u05	>> /backup/log/part2-extend-volume-worker13-u05	hci-backup11
+nohup --pool volumes export 	volume-b447d513-4610-4b1a-8069-84df462d775f	extend-volume-worker13-u04	>> /backup/log/part2-extend-volume-worker13-u04	hci-backup11
+
+
 nohup --pool volumes export 	volume-1f42ff59-54fd-4f88-b300-d2ffd9236654	vol-additional4-worker13	>> /backup/log/part1-vol-additional4-worker13	hci-backup12
 nohup --pool volumes export 	volume-40f0afc6-5dca-4257-be82-b154d355beb9	vol-additional3-worker13	>> /backup/log/part1-vol-additional3-worker13	hci-backup12
+
 nohup --pool volumes export 	volume-94156508-ecaf-47ba-b4bd-bcbbafe4e5cd	vol-additional2-worker13	>> /backup/log/part2-vol-additional2-worker13	hci-backup12
-nohup --pool volumes export 	volume-aa1b0a13-b866-4b08-96bb-a2a184be55f3	vol-additional1-worker13	>> /backup/log/part2-vol-additional1-worker13	hci-backup13
-nohup --pool volumes export 	volume-686a807f-9d05-47c3-9c6b-c7fa5c5fbc6e	vol-os-worker13-dummy	>> /backup/log/part2-vol-os-worker13-dummy	hci-backup13
-				
-				
-				
-nohup --pool volumes export 	volume-37dc9522-ccc1-459c-a21c-6117faa2d5cf	extend-volume-worker14-u05	>> /backup/log/part1-extend-volume-worker14-u05	hci-backup12
-nohup --pool volumes export 	volume-b742a270-0397-4373-8d03-aa7c98965106	extend-volume-worker14-u04	>> /backup/log/part1-extend-volume-worker14-u04	hci-backup12
-nohup --pool volumes export 	volume-716190c2-9ed4-40c7-8b44-b1b07d6356f8	extend-volume-worker14-u03	>> /backup/log/part1-extend-volume-worker14-u03	hci-backup12
 nohup --pool volumes export 	volume-912ecafc-026a-449b-9073-d58585317451	extend-volume-worker14-u02	>> /backup/log/part2-extend-volume-worker14-u02	hci-backup12
-nohup --pool volumes export 	volume-1ed21fc4-9af8-48de-939a-c2a0c593e71a	extend-volume-worker14-u01	>> /backup/log/part2-extend-volume-worker14-u01	hci-backup13
+nohup --pool volumes export 	volume-37dc9522-ccc1-459c-a21c-6117faa2d5cf	extend-volume-worker14-u05	>> /backup/log/part2-extend-volume-worker14-u05	hci-backup12
+nohup --pool volumes export 	volume-b742a270-0397-4373-8d03-aa7c98965106	extend-volume-worker14-u04	>> /backup/log/part2-extend-volume-worker14-u04	hci-backup12
+nohup --pool volumes export 	volume-716190c2-9ed4-40c7-8b44-b1b07d6356f8	extend-volume-worker14-u03	>> /backup/log/part2-extend-volume-worker14-u03	hci-backup12
+
+
 nohup --pool volumes export 	volume-f8f651ab-4bc5-4d14-a9c8-46137e0fdf8c	vol-additional5-worker14	>> /backup/log/part1-vol-additional5-worker14	hci-backup13
 nohup --pool volumes export 	volume-c3a33e27-321a-4b88-b28f-19f68780a5c8	vol-additional4-worker14	>> /backup/log/part1-vol-additional4-worker14	hci-backup13
-nohup --pool volumes export 	volume-fdb2022b-c32a-4ab9-a4db-02e2158bb925	vol-additional3-worker14	>> /backup/log/part2-vol-additional3-worker14	hci-backup14
-nohup --pool volumes export 	volume-a32b7ddc-9c47-45c3-a747-c4084b4c0f2d	vol-additional2-worker14	>> /backup/log/part2-vol-additional2-worker14	hci-backup14
+
+nohup --pool volumes export 	volume-d21b3475-3d46-4864-bd1c-b38ff2acc293	extend-volume-worker12-u01	>> /backup/log/part2-extend-volume-worker12-u01	hci-backup13
+nohup --pool volumes export 	volume-b22ef70d-c5ff-4361-9b40-d7f42289060e	vol-os-worker12-dummy           >> /backup/log/part2-vol-os-worker12-dummy	hci-backup13
+nohup --pool volumes export 	volume-12f167e2-df04-4507-9056-b53ab2fdfd5a	extend-volume-worker13-u01	>> /backup/log/part2-extend-volume-worker13-u01	hci-backup13
+nohup --pool volumes export 	volume-aa1b0a13-b866-4b08-96bb-a2a184be55f3	vol-additional1-worker13	>> /backup/log/part2-vol-additional1-worker13	hci-backup13
+nohup --pool volumes export 	volume-686a807f-9d05-47c3-9c6b-c7fa5c5fbc6e	vol-os-worker13-dummy           >> /backup/log/part2-vol-os-worker13-dummy	hci-backup13
+
+				
+
+nohup --pool volumes export 	volume-fdb2022b-c32a-4ab9-a4db-02e2158bb925	vol-additional3-worker14	>> /backup/log/part1-vol-additional3-worker14	hci-backup14
+nohup --pool volumes export 	volume-a32b7ddc-9c47-45c3-a747-c4084b4c0f2d	vol-additional2-worker14	>> /backup/log/part1-vol-additional2-worker14	hci-backup14
+
 nohup --pool volumes export 	volume-7d41905d-f991-4cdb-a36c-632d2a6e5198	vol-additional1-worker14	>> /backup/log/part2-vol-additional1-worker14	hci-backup14
-nohup --pool volumes export 	volume-aa972642-efa3-45b2-b737-bb438f3142ea	vol-os-worker14-dummy	>> /backup/log/part2-vol-os-worker14-dummy	hci-backup13
+nohup --pool volumes export 	volume-aa972642-efa3-45b2-b737-bb438f3142ea	vol-os-worker14-dummy	        >> /backup/log/part2-vol-os-worker14-dummy	hci-backup14
+nohup --pool volumes export 	volume-20d59877-a466-438e-8a36-2997d3c565d3	extend-volume-worker12-u04	>> /backup/log/part2-extend-volume-worker12-u04	hci-backup14
+nohup --pool volumes export 	volume-1ed21fc4-9af8-48de-939a-c2a0c593e71a	extend-volume-worker14-u01	>> /backup/log/part2-extend-volume-worker14-u01	hci-backup14
