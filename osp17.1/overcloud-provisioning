@@ -1,0 +1,146 @@
+### Set root Password Overcloud
+(undercloud) [stack@undercloud ~]$ openssl passwd -6
+Password: 
+Verifying - Password: 
+$6$Xaf8d0qEf8KjTOQ5$hhNKs/zLpxRlEwSpMLCy71IERmy3KKTw.UVSgExCnxYmHCf7zzNKnyuXalediJgYeDgozBU1AprDL0FePhq6I.
+(undercloud) [stack@undercloud ~]$ vim /home/stack/set-root-password.yaml
+- name: Set root password
+  hosts: allovercloud
+  any_errors_fatal: true
+  gather_facts: false
+
+  pre_tasks:
+  - name: Wait for provisioned nodes to boot
+    wait_for_connection:
+      timeout: 600
+      delay: 10
+
+  tasks:
+  - name: Set root password
+    become: true
+    user:
+      name: root
+      password: "$6$Xaf8d0qEf8KjTOQ5$hhNKs/zLpxRlEwSpMLCy71IERmy3KKTw.UVSgExCnxYmHCf7zzNKnyuXalediJgYeDgozBU1AprDL0FePhq6I."
+
+[stack@undercloud ~]$ vim overcloud-baremetal-deploy.yaml 
+- name: Controller
+  count: 3
+  defaults:
+    networks:
+    - network: ctlplane
+      vif: true
+
+       : (omitted)
+
+  ansible_playbooks:                                    <=====================(*)Add
+  - playbook: /home/stack/set-root-password.yaml        <=====================(*)Add
+
+
+### Set Root Disk
+(undercloud) [stack@director ~]$ openstack baremetal node list
++--------------------------------------+-----------------+---------------+-------------+--------------------+-------------+
+| UUID                                 | Name            | Instance UUID | Power State | Provisioning State | Maintenance |
++--------------------------------------+-----------------+---------------+-------------+--------------------+-------------+
+| 7060fce1-e526-4477-889e-2ee042e5c091 | ceph-storage-01 | None          | power off   | available          | False       |
+| 4c5716b4-86ec-443e-8456-3fa4b9de4a37 | ceph-storage-02 | None          | power off   | available          | False       |
+| db164a68-7d89-4985-9fb4-ffb18c0b7e7a | ceph-storage-03 | None          | power off   | available          | False       |
+| 8a629e17-51d8-4db7-abcc-ba3833a46da5 | compute-01      | None          | power off   | available          | False       |
+| 36d19518-e939-42d5-8f06-d33b7a1e64e1 | compute-02      | None          | power off   | available          | False       |
+| 410a1317-0dee-4a02-988e-11c54880c6c5 | compute-03      | None          | power off   | available          | False       |
+| 98d7a3df-478b-48a4-a975-93ed48c95fc2 | controller-01   | None          | power off   | available          | False       |
+| 680dea46-d31c-42e1-acef-3aaacd702366 | controller-02   | None          | power off   | available          | False       |
+| ef7f37ca-b6e1-4f35-ac4e-7e7602c635bc | controller-03   | None          | power off   | available          | False       |
++--------------------------------------+-----------------+---------------+-------------+--------------------+-------------+
+(undercloud) [stack@director ~]$ openstack baremetal introspection data save 7060fce1-e526-4477-889e-2ee042e5c091 | jq ".inventory.disks"  > ceph-node1
+(undercloud) [stack@director ~]$ openstack baremetal introspection data save 4c5716b4-86ec-443e-8456-3fa4b9de4a37 | jq ".inventory.disks"  > ceph-node2
+(undercloud) [stack@director ~]$ openstack baremetal introspection data save db164a68-7d89-4985-9fb4-ffb18c0b7e7a | jq ".inventory.disks"  > ceph-node3
+
+cat ceph-node1
+[
+  {
+    "name": "/dev/sda",
+    "model": "MK003840GWSSF",
+    "size": 3840755982336,
+    "rotational": false,
+    "wwn": "0x5002538e01796100",
+    "serial": "S5JKNA0R702628",
+    "vendor": "ATA",
+    "wwn_with_extension": "0x5002538e01796100",
+    "wwn_vendor_extension": null,
+    "hctl": "0:2:1:0",
+    "by_path": "/dev/disk/by-path/pci-0000:47:00.0-scsi-0:2:1:0"
+  },
+  {
+    "name": "/dev/sdb",
+    "model": "MK003840GWSSF",
+    "size": 3840755982336,
+    "rotational": false,
+    "wwn": "0x5002538e01679ef7",
+    "serial": "S5JKNE0R600025",
+    "vendor": "ATA",
+    "wwn_with_extension": "0x5002538e01679ef7",
+    "wwn_vendor_extension": null,
+    "hctl": "0:2:2:0",
+    "by_path": "/dev/disk/by-path/pci-0000:47:00.0-scsi-0:2:2:0"
+  },
+  {
+    "name": "/dev/sdc",
+    "model": "MK003840GWSSF",
+    "size": 3840755982336,
+    "rotational": false,
+    "wwn": "0x5002538e017960f1",
+    "serial": "S5JKNA0R702613",
+    "vendor": "ATA",
+    "wwn_with_extension": "0x5002538e017960f1",
+    "wwn_vendor_extension": null,
+    "hctl": "0:2:3:0",
+    "by_path": "/dev/disk/by-path/pci-0000:47:00.0-scsi-0:2:3:0"
+  },
+  {
+    "name": "/dev/nvme0n1",
+    "model": "HPE NS204i-p Gen10+ Boot Controller",
+    "size": 480036519936,
+    "rotational": false,
+    "wwn": "eui.0050438705000001",
+    "serial": "00000000000000000000",
+    "vendor": null,
+    "wwn_with_extension": null,
+    "wwn_vendor_extension": null,
+    "hctl": null,
+    "by_path": "/dev/disk/by-path/pci-0000:2b:00.0-nvme-1"
+  }
+]
+
+
+openstack baremetal node set --property root_device='{"wwn": "eui.0050438705000001"}' 7060fce1-e526-4477-889e-2ee042e5c091
+openstack baremetal node set --property root_device='{"wwn": "eui.0050436305000001"}' 4c5716b4-86ec-443e-8456-3fa4b9de4a37;
+openstack baremetal node set --property root_device='{"wwn": "eui.0050435305000001"}' db164a68-7d89-4985-9fb4-ffb18c0b7e7a
+
+
+### Generate Role ComputeGpu
+openstack overcloud roles   generate -o /home/stack/templates/01-roles-data.yaml   Compute:ComputeGpu  Controller CephStorage 
+
+### Set Role GPU to Compute Node & Set Role Ceph for Storage-Node
+openstack baremetal node set  --resource-class baremetal.GPU compute-01;
+openstack baremetal node set  --resource-class baremetal.GPU compute-02;
+openstack baremetal node set  --resource-class baremetal.GPU compute-03;
+openstack baremetal node set  --resource-class baremetal.CEPH ceph-storage-01;
+openstack baremetal node set  --resource-class baremetal.CEPH ceph-storage-02;
+openstack baremetal node set  --resource-class baremetal.CEPH ceph-storage-03;
+
+### Set Networking Template
+
+Edit the following file
+/home/stack/templates/02-network-data.yaml
+/home/stack/templates/03-vip-data.yaml
+
+openstack overcloud network provision --templates /usr/share/openstack-tripleo-heat-templates --output  /home/stack/templates/overcloud-networks-deployed.yaml /home/stack/templates/02-network-data.yaml
+openstack overcloud network vip provision --templates /usr/share/openstack-tripleo-heat-templates --stack overcloud --output  /home/stack/templates/overcloud-vip-deployed.yaml /home/stack/templates/03-vip-data.yaml
+
+
+
+openstack overcloud node provision --templates /usr/share/openstack-tripleo-heat-templates --stack overcloud --network-config --output /home/stack/templates/overcloud-baremetal-deployed.yaml /home/stack/templates/overcloud-baremetal-deploy.yaml
+
+
+
+openstack overcloud ceph deploy /home/stack/templates/overcloud-baremetal-deployed.yaml -o deployed_ceph.yaml --network-data 02-network_data.yaml  --container-image-prepare /home/stack/containers-prepare-parameter.yaml
