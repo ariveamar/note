@@ -34,8 +34,7 @@ $6$Xaf8d0qEf8KjTOQ5$hhNKs/zLpxRlEwSpMLCy71IERmy3KKTw.UVSgExCnxYmHCf7zzNKnyuXaled
 
   ansible_playbooks:                                    <=====================(*)Add
   - playbook: /home/stack/set-root-password.yaml        <=====================(*)Add
-
-
+#########################################################################################################################
 ### Set Root Disk
 (undercloud) [stack@director ~]$ openstack baremetal node list
 +--------------------------------------+-----------------+---------------+-------------+--------------------+-------------+
@@ -116,9 +115,11 @@ openstack baremetal node set --property root_device='{"wwn": "eui.00504387050000
 openstack baremetal node set --property root_device='{"wwn": "eui.0050436305000001"}' 4c5716b4-86ec-443e-8456-3fa4b9de4a37;
 openstack baremetal node set --property root_device='{"wwn": "eui.0050435305000001"}' db164a68-7d89-4985-9fb4-ffb18c0b7e7a
 
-
+#########################################################################################################################
 ### Generate Role ComputeGpu
 openstack overcloud roles   generate -o /home/stack/templates/01-roles-data.yaml   Compute:ComputeGpu  Controller CephStorage 
+
+
 
 ### Set Role GPU to Compute Node & Set Role Ceph for Storage-Node
 openstack baremetal node set  --resource-class baremetal.GPU compute-01;
@@ -128,12 +129,18 @@ openstack baremetal node set  --resource-class baremetal.CEPH ceph-storage-01;
 openstack baremetal node set  --resource-class baremetal.CEPH ceph-storage-02;
 openstack baremetal node set  --resource-class baremetal.CEPH ceph-storage-03;
 
+
+#########################################################################################################################
 ### Set Networking Template
 
-Edit the following file
+###Edit the following file
 /home/stack/templates/02-network-data.yaml
 /home/stack/templates/03-vip-data.yaml
+/home/stack/templates/90-network-environment.yaml 
+/home/stack/templates/overcloud-baremetal-deploy.yaml
 
+
+### Provisioning Networking
 openstack overcloud network provision --templates /usr/share/openstack-tripleo-heat-templates --output  /home/stack/templates/overcloud-networks-deployed.yaml /home/stack/templates/02-network-data.yaml
 openstack overcloud network vip provision --templates /usr/share/openstack-tripleo-heat-templates --stack overcloud --output  /home/stack/templates/overcloud-vip-deployed.yaml /home/stack/templates/03-vip-data.yaml
 
@@ -143,4 +150,4 @@ openstack overcloud node provision --templates /usr/share/openstack-tripleo-heat
 
 
 
-openstack overcloud ceph deploy /home/stack/templates/overcloud-baremetal-deployed.yaml -o deployed_ceph.yaml --network-data 02-network_data.yaml  --container-image-prepare /home/stack/containers-prepare-parameter.yaml
+openstack overcloud ceph deploy --tld "kemhan.go.id" --config /home/stack/templates/initial-ceph.conf /home/stack/templates/overcloud-baremetal-deployed.yaml -o deployed_ceph.yaml --network-data 02-network_data.yaml  --container-image-prepare /home/stack/containers-prepare-parameter.yaml
