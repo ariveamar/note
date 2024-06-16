@@ -17,3 +17,4 @@ yum -y install tmux
 yum -y update
 dnf install -y python3-tripleoclient
 openstack tripleo container image prepare default --local-push-destination --output-env-file containers-prepare-parameter.yaml
+sudo reboot
