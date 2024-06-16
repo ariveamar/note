@@ -1,0 +1,3 @@
+Test Connection to IPMI
+yum -y install ipmitool
+ipmitool -I lanplus -U hpadmin -P 'password*1' -H 10.122.1.11 -p 623 power status
