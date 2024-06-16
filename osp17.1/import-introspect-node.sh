@@ -103,4 +103,5 @@ nodes:
     pm_addr: "10.122.1.13"
 EOF
 openstack overcloud node import /home/stack/node.yaml
+openstack overcloud node introspect --all-manageable --provide
 
