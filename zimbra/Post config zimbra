@@ -1,0 +1,30 @@
+Post Config Zimbra
+
+Single Command Run In Logger :
+
+zmprov mcf zimbraLmtpPermanentFailureWhenOverQuota TRUE
+zmprov mcf zimbraMtaLmtpHostLookup native
+zmprov mcf zimbraMtaMaxMessageSize 100000
+zmprov mcf zimbraImapMaxRequestSize 10240
+
+Run on each MTA Server :
+5.2.1. Zimbra Restricted Sender Must Login >> Check Documentasi
+zmprov ms `zmhostname` zimbraMtaLmtpHostLookup native
+zmprov ms `zmhostname` zimbraLmtpNumThreads 200
+zmlocalconfig -e postfix_lmtp_destination_concurrency_limit=200
+zmmtactl restart
+
+
+
+Run on each Mailbox & Proxy:
+zmprov ms `zmhostname` zimbraHttpSSLNumThreads 800
+zmprov ms `zmhostname` zimbraHttpNumThreads 800
+zmprov ms `zmhostname` zimbraPop3NumThreads 800
+zmprov ms `zmhostname` zimbraImapNumThreads 800
+zmprov ms `zmhostname` zimbraFileUploadMaxSize 30965760
+zmprov ms `zmhostname` zimbraMailContentMaxSize 100000
+zmmailboxdctl restart
+
+
+
+
