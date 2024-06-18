@@ -1,0 +1,19 @@
+apiVersion: "local.storage.openshift.io/v1"
+kind: "LocalVolume"
+metadata:
+  name: "local-disk-log"
+  namespace: "openshift-local-storage"
+spec:
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - log00.ocp-core-jkt.pegadaian.co.id
+  storageClassDevices:
+    - storageClassName: "local-disk-log"
+      volumeMode: Filesystem
+      fsType: xfs
+      devicePaths:
+      - /dev/sdb

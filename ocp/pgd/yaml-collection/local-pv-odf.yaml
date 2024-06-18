@@ -1,0 +1,20 @@
+apiVersion: "local.storage.openshift.io/v1"
+kind: "LocalVolume"
+metadata:
+  name: "local-disk-odf"
+  namespace: "openshift-local-storage"
+spec:
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - storage00.ocp-core-jkt.pegadaian.co.id
+          - storage01.ocp-core-jkt.pegadaian.co.id
+          - storage02.ocp-core-jkt.pegadaian.co.id
+  storageClassDevices:
+    - storageClassName: "local-disk-odf"
+      volumeMode: Block
+      devicePaths:
+      - /dev/sdb

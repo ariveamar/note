@@ -1,0 +1,50 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    prometheusOperator:
+      nodeSelector:
+        node-role.kubernetes.io/mon: ""
+    prometheusK8s:
+      retention: 14d
+      nodeSelector:
+        node-role.kubernetes.io/mon: ""
+      volumeClaimTemplate:
+        spec:
+         storageClassName: local-disk-prome
+         volumeMode: Filesystem
+         resources:
+           requests:
+             storage: 50Gi
+    alertmanagerMain:
+      nodeSelector:
+        node-role.kubernetes.io/mon: ""
+      volumeClaimTemplate:
+        metadata:
+          name: alert-main
+        spec:
+          storageClassName: local-disk-alert
+          resources:
+            requests:
+              storage: 2Gi
+    kubeStateMetrics:
+      nodeSelector:
+        node-role.kubernetes.io/mon: ""
+    grafana:
+      nodeSelector:
+        node-role.kubernetes.io/mon: ""
+    telemeterClient:
+      nodeSelector:
+        node-role.kubernetes.io/mon: ""
+    k8sPrometheusAdapter:
+      nodeSelector:
+        node-role.kubernetes.io/mon: ""
+    openshiftStateMetrics:
+      nodeSelector:
+        node-role.kubernetes.io/mon: ""
+    thanosquerier:
+      nodeSelector:
+        node-role.kubernetes.io/mon: ""
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring

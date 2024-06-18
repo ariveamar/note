@@ -1,0 +1,21 @@
+variant: openshift
+version: 4.12.0
+metadata:
+  name: 99-master-chrony-conf-override
+  labels:
+    machineconfiguration.openshift.io/role: master
+storage:
+  files:
+    - path: /etc/chrony.conf
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+           pool ntp-jkt.pegadaian.co.id iburst
+           driftfile /var/lib/chrony/drift
+           makestep 1.0 3
+           rtcsync
+           keyfile /etc/chrony.keys
+           ntsdumpdir /var/lib/chrony
+           logdir /var/log/chrony
+
