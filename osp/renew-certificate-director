@@ -1,0 +1,2 @@
+openssl pkcs12 -in /var/lib/certmonger/local/creds -out /etc/pki/ca-trust/source/anchors/cm-local-ca.pem -nokeys -nodes -passin pass:""
+sudo update-ca-trust extract
