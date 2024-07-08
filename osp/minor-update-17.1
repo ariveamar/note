@@ -1,0 +1,52 @@
+#### Modify Repository RHEL version
+
+## Lock version
+mkdir ~/update/
+ cat > ~/update/set_release.yaml <<'EOF'
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: set release to 9.2
+      command: subscription-manager release --set=9.2
+      become: true
+EOF
+
+ansible-playbook -i ~/overcloud-deploy/overcloud/tripleo-ansible-inventory.yaml -f 25 ~/update/set_release.yaml --limit undercloud,Controller,ComputeGpu,CephStorage
+
+## Enable Repo 
+# Non Ceph Node
+cat > ~/update/update_rhosp_repos.yaml <<'EOF'
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: change osp repos
+      command: subscription-manager repos --enable=openstack-17.1-for-rhel-9-x86_64-rpms
+      become: true
+EOF
+
+ansible-playbook -i ~/overcloud-deploy/overcloud/tripleo-ansible-inventory.yaml -f 25 ~/update/update_rhosp_repos.yaml --limit undercloud,Controller,ComputeGpu
+
+# Ceph Node
+cat > ~/update_ceph_repos.yaml <<'EOF'
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: change ceph repos
+      command: subscription-manager repos --enable=openstack-17.1-deployment-tools-for-rhel-9-x86_64-rpms
+      become: true
+EOF
+
+ansible-playbook -i ~/overcloud-deploy/overcloud/tripleo-ansible-inventory.yaml -f 25 ~/update/update_ceph_repos.yaml --limit CephStorage
+
+
+#### Disable Fencing
+ssh tripleo-admin@10.121.2.3 "sudo pcs property set stonith-enabled=false"
+sed -i 's\EnableFencing: true\EnableFencing: false\g' /home/stack/templates/fencing.yaml
+
+
+#### Update Undercloud
+
+sudo dnf -y update openstack-tripleo-validations python3-validations-libs validations-common
+validation run -i ~/overcloud-deploy/overcloud/tripleo-ansible-inventory.yaml --group pre-update
+
+
