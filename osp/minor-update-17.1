@@ -27,7 +27,7 @@ EOF
 ansible-playbook -i ~/overcloud-deploy/overcloud/tripleo-ansible-inventory.yaml -f 25 ~/update/update_rhosp_repos.yaml --limit undercloud,Controller,ComputeGpu
 
 # Ceph Node
-cat > ~/update_ceph_repos.yaml <<'EOF'
+cat > ~/update/update_ceph_repos.yaml <<'EOF'
 - hosts: all
   gather_facts: false
   tasks:
