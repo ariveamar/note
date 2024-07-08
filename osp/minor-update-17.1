@@ -68,12 +68,12 @@ source stackrc
 openstack overcloud update run --stack overcloud --limit Controller
 
 #### Update Compute
-
+source stackrc
 openstack overcloud update run -y --limit 'Compute1'
 
 
 #### Update Ceph 
-
+source stackrc
 openstack overcloud update run --stack  overcloud --limit CephStorage
 sudo cephadm shell -- ceph health
 openstack tripleo container image list -f value |  awk -F '//' '/ceph/ {print $2}'
@@ -83,4 +83,5 @@ check status upgrade
 sudo cephadm shell -- ceph orch upgrade status
 
 #### Database online update
+source stackrc
 openstack overcloud external-update run --stack overcloud --tags online_upgrade
