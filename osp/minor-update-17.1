@@ -53,6 +53,28 @@ openstack undercloud upgrade
 sudo reboot
 
 
+#### Update Overcloud Images
+
+rm -rf ~/images/*
+cd ~/images
+for i in /usr/share/rhosp-director-images/ironic-python-agent-latest-17.1.tar /usr/share/rhosp-director-images/overcloud-hardened-uefi-full-latest-17.1.tar; do tar -xvf $i; done
+cd ~
+openstack overcloud image upload --update-existing --image-path /home/stack/images/
+openstack overcloud node configure $(openstack baremetal node list -c UUID -f value)
+
+
+
+#### Update Preparation
+Copy deploy.sh dan edit menjadi seperti ini 
+openstack overcloud update prepare \
+--templates \
+--stack <stack_name> \
+-r <roles_data_file> \
+-n <network_data_file> \
+-e <environment_file> \
+-e <environment_file> \
+
+
 
 #### Running Container Image Preparation
 source stackrc
