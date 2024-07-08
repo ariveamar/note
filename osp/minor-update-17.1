@@ -48,5 +48,39 @@ sed -i 's\EnableFencing: true\EnableFencing: false\g' /home/stack/templates/fenc
 
 sudo dnf -y update openstack-tripleo-validations python3-validations-libs validations-common
 validation run -i ~/overcloud-deploy/overcloud/tripleo-ansible-inventory.yaml --group pre-update
+sudo dnf update -y python3-tripleoclient ansible-*
+openstack undercloud upgrade
+sudo reboot
 
 
+
+#### Running Container Image Preparation
+source stackrc
+openstack overcloud external-update run --stack overcloud --tags container_image_prepare
+
+#### Updating OVN
+source stackrc
+openstack overcloud external-update run --stack overcloud --tags ovn
+
+
+#### Update Controller
+source stackrc
+openstack overcloud update run --stack overcloud --limit Controller
+
+#### Update Compute
+
+openstack overcloud update run -y --limit 'Compute1'
+
+
+#### Update Ceph 
+
+openstack overcloud update run --stack  overcloud --limit CephStorage
+sudo cephadm shell -- ceph health
+openstack tripleo container image list -f value |  awk -F '//' '/ceph/ {print $2}'
+sudo cephadm shell -- ceph orch upgrade start --image <image_name>: <version>
+
+check status upgrade
+sudo cephadm shell -- ceph orch upgrade status
+
+#### Database online update
+openstack overcloud external-update run --stack overcloud --tags online_upgrade
