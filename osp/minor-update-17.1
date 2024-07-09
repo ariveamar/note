@@ -99,7 +99,11 @@ source stackrc
 openstack overcloud update run --stack  overcloud --limit CephStorage
 sudo cephadm shell -- ceph health
 openstack tripleo container image list -f value |  awk -F '//' '/ceph/ {print $2}'
-sudo cephadm shell -- ceph orch upgrade start --image <image_name>: <version>
+director.ctlplane.kemhan.go.id:8787/rhceph/rhceph-6-dashboard-rhel9:latest
+director.ctlplane.kemhan.go.id:8787/rhceph/rhceph-6-rhel9:latest
+
+sudo cephadm shell -- ceph orch upgrade start --image director.ctlplane.kemhan.go.id:8787/rhceph/rhceph-6-dashboard-rhel9:latest
+sudo cephadm shell -- ceph orch upgrade start --image director.ctlplane.kemhan.go.id:8787/rhceph/rhceph-6-rhel9:latest
 
 check status upgrade
 sudo cephadm shell -- ceph orch upgrade status
