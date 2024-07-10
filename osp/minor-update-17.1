@@ -111,3 +111,35 @@ sudo cephadm shell -- ceph orch upgrade status
 #### Database online update
 source stackrc
 openstack overcloud external-update run --stack overcloud --tags online_upgrade
+
+#### Enable Fencing
+ssh tripleo-admin@10.121.2.3 "sudo pcs property set stonith-enabled=true"
+sed -i 's\EnableFencing: false\EnableFencing: true\g' /home/stack/templates/fencing.yaml
+
+
+#### Reboot Contoller 1 by 1 
+sudo pcs cluster stop
+sudo reboot
+
+#### Reboot CephOSD 1 by 1
+sudo cephadm shell -- ceph osd set noout
+sudo cephadm shell -- ceph osd set norebalance
+sudo reboot
+sudo cephadm -- shell ceph status
+sudo cephadm shell -- ceph osd unset noout
+sudo cephadm shell -- ceph osd unset norebalance
+
+
+#### Reboot Compute Node 1 by 1
+disable nova compute serivce
+live migrate to other compute
+reboot
+
+#### Validation after update
+run deployment againg
+jalankan
+source stackrc 
+validation run -i ~/overcloud-deploy/overcloud/tripleo-ansible-inventory.yaml --group post-update
+
+
+
