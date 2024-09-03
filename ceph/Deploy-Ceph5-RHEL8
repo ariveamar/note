@@ -1,0 +1,44 @@
+subscription-manager repos --disable=*; \
+subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms; \
+subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms; \
+subscription-manager repos --enable=rhceph-5-tools-for-rhel-8-x86_64-rpms
+
+dnf install cephadm-ansible -y
+
+cat << EOF >> /etc/hosts
+10.122.8.150 ceph-admin
+10.122.8.151 ceph-server-1
+10.122.8.152 ceph-server-2
+10.122.8.153 ceph-server-3
+EOF
+
+## on All Nodes
+adduser ceph-admin; \
+echo "password"|passwd --stdin ceph-admin; \
+cat << EOF >/etc/sudoers.d/ceph-admin
+ceph-admin ALL = (root) NOPASSWD:ALL
+EOF; \
+chmod 0440 /etc/sudoers.d/ceph-admin
+
+su - ceph-admin
+ssh-keygen
+ssh-copy-id ceph-admin@ip_host
+sed -i 's\enforcing\permissive\g' /etc/selinux/config
+
+
+
+ansible-playbook -i hosts cephadm-preflight.yml --extra-vars "ceph_origin=rhcs"
+
+
+sudo cephadm bootstrap --mon-ip=10.122.8.151 \
+--apply-spec=/usr/share/cephadm-ansible/initial.yaml \
+--initial-dashboard-password=password \
+--registry-url registry.redhat.io \
+--registry-username ts.kemhan \
+--registry-password 'P@ssw0rdXECURE' \
+--dashboard-password-noupdate \
+--allow-fqdn-hostname \
+--ssh-user=ceph-admin \
+--ssh-private-key=/home/ceph-admin/.ssh/id_rsa \
+--ssh-public-key /home/ceph-admin/.ssh/id_rsa.pub \
+--cluster-network=10.122.8.0/24
