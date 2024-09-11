@@ -21,17 +21,6 @@ spec:
         - ip: 172.28.1.65
           prefix-length: 24
         enabled: true
-
-============================================================
-apiVersion: nmstate.io/v1
-kind: NodeNetworkConfigurationPolicy
-metadata:
-  name: cbtcnb02nfvpct01-cwl-storage-eth7
-spec:
-  nodeSelector: 
-    kubernetes.io/hostname: cbtcnb02nfvpct01.intra.excelcom.co.id
-  desiredState:
-    interfaces:
     - name: ens2f1np1.4013 
       description: cbtcnb02nfvpct01 CWL-Storage-172.28.2.65/24 
       type: vlan 
@@ -70,17 +59,6 @@ spec:
         - ip: 172.28.1.66
           prefix-length: 24
         enabled: true
-
-============================================================
-apiVersion: nmstate.io/v1
-kind: NodeNetworkConfigurationPolicy
-metadata:
-  name: cbtcnb02nfvpct02-cwl-storage-eth7
-spec:
-  nodeSelector: 
-    kubernetes.io/hostname: cbtcnb02nfvpct02.intra.excelcom.co.id
-  desiredState:
-    interfaces:
     - name: ens2f1np1.4013 
       description: cbtcnb02nfvpct02 CWL-Storage-172.28.2.66/24 
       type: vlan 
@@ -118,17 +96,6 @@ spec:
         - ip: 172.28.1.67
           prefix-length: 24
         enabled: true
-
-============================================================
-apiVersion: nmstate.io/v1
-kind: NodeNetworkConfigurationPolicy
-metadata:
-  name: cbtcnb02nfvpct03-cwl-storage-eth7
-spec:
-  nodeSelector: 
-    kubernetes.io/hostname: cbtcnb02nfvpct03.intra.excelcom.co.id
-  desiredState:
-    interfaces:
     - name: ens2f1np1.4013 
       description: cbtcnb02nfvpct03 CWL-Storage-172.28.2.67/24 
       type: vlan 
