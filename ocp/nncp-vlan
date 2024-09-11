@@ -1,14 +1,14 @@
 apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
 metadata:
-  name: cbtcnb02nfvpct01-cwl-storage-eth4
+  name: cbtcnb02nfvpct01-cwl-storage
 spec:
   nodeSelector:
     kubernetes.io/hostname: cbtcnb02nfvpct01.intra.excelcom.co.id
   desiredState:
     interfaces:
     - name: ens1f0np0.4013
-      description: cbtcnb02nfvpct01 CWL-Storage-172.28.1.65/24
+      description: cbtcnb02nfvpct01 CWL-Storage-172.28.1.65/24 eth4
       type: vlan 
       state: up
       mtu: 9000
@@ -22,7 +22,7 @@ spec:
           prefix-length: 24
         enabled: true
     - name: ens2f1np1.4013 
-      description: cbtcnb02nfvpct01 CWL-Storage-172.28.2.65/24 
+      description: cbtcnb02nfvpct01 CWL-Storage-172.28.2.65/24 eth7
       type: vlan 
       state: up 
       mtu: 9000
@@ -40,16 +40,17 @@ spec:
 apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
 metadata:
-  name: cbtcnb02nfvpct02-cwl-storage-eth4
+  name: cbtcnb02nfvpct02-cwl-storage
 spec:
   nodeSelector: 
     kubernetes.io/hostname: cbtcnb02nfvpct02.intra.excelcom.co.id
   desiredState:
     interfaces:
     - name: ens1f0np0.4013
-      description: cbtcnb02nfvpct02 CWL-Storage-172.28.1.66/24
+      description: cbtcnb02nfvpct02 CWL-Storage-172.28.1.66/24 eth4
       type: vlan 
       state: up 
+      mtu: 9000
       vlan:
         base-iface: ens1f0np0 
         id: 4013
@@ -60,9 +61,10 @@ spec:
           prefix-length: 24
         enabled: true
     - name: ens2f1np1.4013 
-      description: cbtcnb02nfvpct02 CWL-Storage-172.28.2.66/24 
+      description: cbtcnb02nfvpct02 CWL-Storage-172.28.2.66/24 eth7
       type: vlan 
       state: up 
+      mtu: 9000
       vlan:
         base-iface: ens2f1np1
         id: 4013 
@@ -77,16 +79,17 @@ spec:
 apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
 metadata:
-  name: cbtcnb02nfvpct03-cwl-storage-eth4
+  name: cbtcnb02nfvpct03-cwl-storage
 spec:
   nodeSelector: 
     kubernetes.io/hostname: cbtcnb02nfvpct03.intra.excelcom.co.id
   desiredState:
     interfaces:
     - name: ens1f0np0.4013
-      description: cbtcnb02nfvpct03 CWL-Storage-172.28.1.67/24
+      description: cbtcnb02nfvpct03 CWL-Storage-172.28.1.67/24 eth4
       type: vlan 
-      state: up 
+      state: up
+      mtu: 9000
       vlan:
         base-iface: ens1f0np0 
         id: 4013
@@ -97,9 +100,10 @@ spec:
           prefix-length: 24
         enabled: true
     - name: ens2f1np1.4013 
-      description: cbtcnb02nfvpct03 CWL-Storage-172.28.2.67/24 
+      description: cbtcnb02nfvpct03 CWL-Storage-172.28.2.67/24 eth7
       type: vlan 
-      state: up 
+      state: up
+      mtu: 9000
       vlan:
         base-iface: ens2f1np1
         id: 4013 
