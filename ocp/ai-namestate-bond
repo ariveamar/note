@@ -1,0 +1,29 @@
+interfaces:
+- name: bond0
+  type: bond
+  state: up
+  mtu: 9000
+  ipv4:
+    address:
+    - ip: 10.25.131.20
+      prefix-length: 24
+    enabled: true
+  link-aggregation:
+    mode: 802.3ad
+    options:
+      miimon: '100'
+    port:
+    - ens1f1np1
+    - ens3f0np0
+routes:
+  config:
+  - destination: 0.0.0.0/0
+    next-hop-address: 10.25.131.1
+    next-hop-interface: bond0
+dns-resolver:
+  config:
+    search:
+    - cluster-name.intra.excelcom.co.id
+    - intra.excelcom.co.id
+    server:
+    - 10.25.131.70
