@@ -41,7 +41,7 @@ spec:
       ipv4:
         dhcp: false
         address:
-        - ip: 172.28.2.66
+        - ip: 172.28.2.65
           prefix-length: 24
         enabled: true
 ============================================================
