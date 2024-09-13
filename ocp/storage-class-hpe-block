@@ -1,0 +1,24 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  name: hpe-standard
+provisioner: csi.hpe.com
+parameters:
+  accessProtocol: scsi
+  iscsiPortalIps: 172.28.1.5,172.28.1.6,172.28.1.7,172.28.1.8,172.28.2.5,172.28.2.6,172.28.2.7,172.27.2.8
+  csi.storage.k8s.io/fstype: ext4
+  csi.storage.k8s.io/controller-expand-secret-name: hpe-cbt02nfvprim01
+  csi.storage.k8s.io/controller-expand-secret-namespace: hpe-storage
+  csi.storage.k8s.io/controller-publish-secret-name: hpe-cbt02nfvprim01
+  csi.storage.k8s.io/controller-publish-secret-namespace: hpe-storage
+  csi.storage.k8s.io/node-publish-secret-name: hpe-cbt02nfvprim01
+  csi.storage.k8s.io/node-publish-secret-namespace: hpe-storage
+  csi.storage.k8s.io/node-stage-secret-name: hpe-cbt02nfvprim01
+  csi.storage.k8s.io/node-stage-secret-namespace: hpe-storage
+  csi.storage.k8s.io/provisioner-secret-name: hpe-cbt02nfvprim01
+  csi.storage.k8s.io/provisioner-secret-namespace: hpe-storage
+  description: "Volume created by the HPE CSI Driver for Kubernetes"
+reclaimPolicy: Delete
+allowVolumeExpansion: true
