@@ -1,0 +1,113 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: cbtcnb02nfvcoect01-cwl-storage
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: cbtcnb02nfvcoect01.intra.excelcom.co.id
+  desiredState:
+    interfaces:
+    - name: ens1f0np0.3013
+      description: cbtcnb02nfvcoect01 CWL-Storage-172.28.9.65/24 eth4
+      type: vlan 
+      state: up
+      mtu: 9000
+      vlan:
+        base-iface: ens1f0np0
+        id: 3013
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.9.65
+          prefix-length: 24
+        enabled: true
+    - name: ens2f1np1.3013 
+      description: cbtcnb02nfvcoect01 CWL-Storage-172.28.10.65/24 eth7
+      type: vlan 
+      state: up 
+      mtu: 9000
+      vlan:
+        base-iface: ens2f1np1
+        id: 3013 
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.10.65
+          prefix-length: 24
+        enabled: true
+---
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: cbtcnb02nfvcoect02-cwl-storage
+spec:
+  nodeSelector: 
+    kubernetes.io/hostname: cbtcnb02nfvcoect02.intra.excelcom.co.id
+  desiredState:
+    interfaces:
+    - name: ens1f0np0.3013
+      description: cbtcnb02nfvcoect02 CWL-Storage-172.28.9.66/24 eth4
+      type: vlan 
+      state: up 
+      mtu: 9000
+      vlan:
+        base-iface: ens1f0np0 
+        id: 3013
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.9.66
+          prefix-length: 24
+        enabled: true
+    - name: ens2f1np1.3013 
+      description: cbtcnb02nfvcoect02 CWL-Storage-172.28.10.66/24 eth7
+      type: vlan 
+      state: up 
+      mtu: 9000
+      vlan:
+        base-iface: ens2f1np1
+        id: 3013 
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.10.66
+          prefix-length: 24
+        enabled: true
+---
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: cbtcnb02nfvcoect03-cwl-storage
+spec:
+  nodeSelector: 
+    kubernetes.io/hostname: cbtcnb02nfvcoect03.intra.excelcom.co.id
+  desiredState:
+    interfaces:
+    - name: ens1f0np0.3013
+      description: cbtcnb02nfvcoect03 CWL-Storage-172.28.9.67/24 eth4
+      type: vlan 
+      state: up
+      mtu: 9000
+      vlan:
+        base-iface: ens1f0np0 
+        id: 3013
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.9.67
+          prefix-length: 24
+        enabled: true
+    - name: ens2f1np1.3013 
+      description: cbtcnb02nfvcoect03 CWL-Storage-172.28.10.67/24 eth7
+      type: vlan 
+      state: up
+      mtu: 9000
+      vlan:
+        base-iface: ens2f1np1
+        id: 3013 
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.10.67
+          prefix-length: 24
+        enabled: true
