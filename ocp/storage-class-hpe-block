@@ -21,4 +21,5 @@ parameters:
   csi.storage.k8s.io/provisioner-secret-namespace: hpe-storage
   description: "Volume created by the HPE CSI Driver for Kubernetes"
 reclaimPolicy: Delete
+cpg: SSD_r6
 allowVolumeExpansion: true
