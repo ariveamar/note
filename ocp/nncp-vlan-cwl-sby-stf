@@ -1,0 +1,76 @@
+---
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name:  sbycnb02nfvpstf01-cwl-storage
+spec:
+  nodeSelector: 
+    kubernetes.io/hostname:  sbycnb02nfvpstf01.intra.excelcom.co.id
+  desiredState:
+    interfaces:
+    - name: ens1f0np0.4013
+      description:  sbycnb02nfvpstf01 CWL-Storage-172.28.1.68/24 eth4
+      type: vlan 
+      state: up
+      mtu: 9000
+      vlan:
+        base-iface: ens1f0np0 
+        id: 4013
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.1.68
+          prefix-length: 24
+        enabled: true
+    - name: ens2f1np1.4013 
+      description:  sbycnb02nfvpstf01 CWL-Storage-172.28.2.68/24 eth7
+      type: vlan 
+      state: up
+      mtu: 9000
+      vlan:
+        base-iface: ens2f1np1
+        id: 4013 
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.2.68
+          prefix-length: 24
+        enabled: true
+---
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name:  sbycnb02nfvpstf02-cwl-storage
+spec:
+  nodeSelector:
+    kubernetes.io/hostname:  sbycnb02nfvpstf02.intra.excelcom.co.id
+  desiredState:
+    interfaces:
+    - name: ens1f0np0.4013
+      description:  sbycnb02nfvpstf02 CWL-Storage-172.28.1.69/24 eth4
+      type: vlan 
+      state: up
+      mtu: 9000
+      vlan:
+        base-iface: ens1f0np0
+        id: 4013
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.1.69
+          prefix-length: 24
+        enabled: true
+    - name: ens2f1np1.4013 
+      description:  sbycnb02nfvpstf02 CWL-Storage-172.28.2.69/24 eth7
+      type: vlan 
+      state: up 
+      mtu: 9000
+      vlan:
+        base-iface: ens2f1np1
+        id: 4013 
+      ipv4:
+        dhcp: false
+        address:
+        - ip: 172.28.2.69
+          prefix-length: 24
+        enabled: true
