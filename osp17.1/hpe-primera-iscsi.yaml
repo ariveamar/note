@@ -1,0 +1,29 @@
+parameter_defaults:
+  Debug: True
+  CinderEnableIscsiBackend: false
+  ControllerExtraConfig:
+    cinder::config::cinder_config:
+        primera/hpe3par_api_url:
+          value:  https://10.25.131.190/api/v1
+        primera/volume_driver:
+            value: cinder.volume.drivers.hpe.hpe_3par_iscsi.HPE3PARISCSIDriver
+        primera/hpe3par_username:
+            value: ospprod
+        primera/hpe3par_password:
+            value: 'P@ssw0rd*1'
+        primera/hpe3par_cpg:
+            value: SSD_r6
+        primera/san_ip:
+            value: 10.25.131.190
+        primera/hpe3par_iscsi_ips:
+            value: 172.28.7.5,172.28.7.6,172.28.7.7,172.28.7.8,172.28.7.9,172.28.7.10,172.28.7.11,172.28.7.12,172.28.6.5,172.28.6.6,172.28.6.7,172.28.6.8,172.28.6.9,172.28.6.10,172.28.6.11,172.28.6.12
+        primera/san_login:
+            value: ospprod
+        primera/san_password:
+            value: 'P@ssw0rd*1'
+        primera/volume_backend_name:
+            value: primera
+        primera/backend_host:
+            value: hostgroup
+
+    cinder_user_enabled_backends: ['primera']
