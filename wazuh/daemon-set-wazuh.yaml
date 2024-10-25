@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: wazuh-agent
+  namespace: wazuh-agent
+spec:
+  selector:
+    matchLabels:
+      app: wazuh
+  template:
+    metadata:
+      labels:
+        app: wazuh
+    spec:
+      containers:
+        - name: wazuh
+          image: >-
+            docker.io/opennix/wazuh-agent:latest
+          ports:
+            - containerPort: 55000
+          env:
+            - name: JOIN_MANAGER_MASTER_HOST
+              value: "wazuh.wazuh.svc.cluster.local"
+            - name: JOIN_MANAGER_WORKER_HOST
+              value: "wazuh-workers.wazuh.svc.cluster.local"
+            - name: JOIN_MANAGER_PROTOCOL
+              value: "https"
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: JOIN_MANAGER_USER
+              valueFrom:
+              secretKeyRef:
+                name: wazuh-api-cred
+                key: username
+            - name: JOIN_MANAGER_PASSWORD
+              valueFrom:
+              secretKeyRef:
+                name: wazuh-api-cred
+                key: password
+            - name: JOIN_MANAGER_API_PORT
+              value: "55000"
+            - name: JOIN_MANAGER_PORT
+              value: "1514"
+
+
