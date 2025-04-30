@@ -1,1 +1,11 @@
+Reference: https://medium.com/@usman.khan9805/high-availibility-in-postgres-3210fb232f82
 
+dnf install -y https://www.pgpool.net/yum/rpms/4.5/redhat/rhel-8-x86_64/pgpool-II-release-4.5-1.noarch.rpm
+dnf install -y pgpool-II-pg16-*
+dnf install pgpool-II-pg16-extensions pgpool-II-pg16
+
+sudo -u username mkdir pgpool
+/usr/bin/pgpool_setup
+./startall
+
+psql -p 11000
