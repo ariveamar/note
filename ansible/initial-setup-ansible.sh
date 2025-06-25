@@ -7,6 +7,7 @@ sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /var/lib/pgsq
 echo "host      all    all    0.0.0.0/0 md5" >> /var/lib/pgsql/data/pg_hba.conf ;
 sudo -u postgres  createuser automation;
 sudo -u postgres  createdb automationhub -O automation ;
+sudo -u postgres psql -c "ALTER ROLE automation WITH PASSWORD 'P4ssw0rdAAP';"
 
 
 sudo -u postgres psql -d automationhub -c "CREATE EXTENSION hstore;"  ;
