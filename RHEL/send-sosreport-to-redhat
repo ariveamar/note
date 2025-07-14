@@ -1,0 +1,1 @@
+ sos report --all-logs --all-options --upload --upload-user username --upload-pass 'adasdadd' --batch --case-id 121313
