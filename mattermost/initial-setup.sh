@@ -51,7 +51,7 @@ EOF
 sudo systemctl daemon-reload
 sudo cp /opt/mattermost/config/config.json /opt/mattermost/config/config.defaults.json
 sed -i 's/mostest/mmuser-password/g' /opt/mattermost/config/config.json
-sed -i 's/ mattermost_test/mattermost/g' /opt/mattermost/config/config.json
+sed -i 's/mattermost_test/mattermost/g' /opt/mattermost/config/config.json
 systemctl enable  mattermost --now
 echo "END SETUP MM"
 
