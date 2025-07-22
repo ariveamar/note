@@ -1,0 +1,15 @@
+#cloud-config 
+ssh_pwauth: True
+disable_root: false
+users:
+  - name: automation
+    groups:
+      - wheel
+    sudo:
+      - ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+chpasswd:
+  list: |
+    root:P4ssw0rdXECURE
+    automation:P4ssw0rdXECURE
+  expire: false
